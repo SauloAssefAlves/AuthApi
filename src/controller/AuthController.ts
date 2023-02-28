@@ -20,7 +20,9 @@ export class AuthController {
     }
 
     //Criar um ENV para a chave do token secret MD5
-    const token = sign({ id: user.id }, "secret", { expiresIn: "1d" });
+    const token = sign({ id: user.id }, process.env.SECRET_API, {
+      expiresIn: "1d",
+    });
 
     const { id, name } = user;
 

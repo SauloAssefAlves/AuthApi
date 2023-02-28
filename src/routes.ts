@@ -7,6 +7,7 @@ const authcontroller = new AuthController();
 
 export const router = Router();
 
-router.post("/create", usercontroller.store);
 router.get("/users", usercontroller.index);
+router.delete("/user_delete", usercontroller.delete);
+router.post("/create", usercontroller.store);
 router.post("/auth", authcontroller.autenticate);

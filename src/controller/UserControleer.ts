@@ -3,6 +3,17 @@ import { Request, Response } from "express";
 import { hash } from "bcryptjs";
 
 export class UserController {
+  async delete(req: Request, res: Response) {
+    const { email } = req.body;
+    const userExists = await prisma.user.findUnique({ where: { email } });
+    if (!userExists) {
+      return res.json({ error: "User not found" });
+    }
+
+    await prisma.user.delete({ where: { email } });
+    return res.json({ response: `User ${email} deleted` });
+  }
+
   async index(req: Request, res: Response) {
     const users = await prisma.user.findMany();
     return res.json({ users });

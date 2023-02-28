@@ -1,7 +1,12 @@
-import { Router } from 'express'
+import { Router } from "express";
+import { UserController } from "./controller/UserControleer";
+import { AuthController } from "./controller/AuthController";
 
+const usercontroller = new UserController();
+const authcontroller = new AuthController();
 
-export const router = Router()
+export const router = Router();
 
-
-router.get('/', async (req,res) =>  res.json({hello:'WORLD'}))
+router.post("/create", usercontroller.store);
+router.get("/users", usercontroller.index);
+router.post("/auth", authcontroller.autenticate);
